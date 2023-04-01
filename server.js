@@ -1,3 +1,4 @@
+require('dotenv').config()
 const express = require('express')
 const bodyParser = require('body-parser')
 const port = 4000
@@ -9,6 +10,7 @@ const headerHandler = require('./utils/headerHandler')
 
 // Services
 const moviesService = require('./services/movies')
+const userService = require('./services/user')
 
 // Init server
 const app = express()
@@ -23,6 +25,7 @@ app.use(bodyParser.json())
 
 // Routes
 app.use(url + 'movies', moviesService)
+app.use(url + 'user', userService)
 
 app.get('/', function (req, res) {
 	res.send('Silence is golden')
