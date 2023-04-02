@@ -19,5 +19,15 @@ router.get('/list', authorization, async function (req, res, next) {
   }
 })
 
+router.get('/:movieId', authorization, async function (req, res, next) {
+  try {
+    const movieId = req.params.movieId
+    const result = await moviesController.getMovie(movieId)
+
+    res.status(200).json(result)
+  } catch (err) {
+    next(err)
+  }
+})
 
 module.exports = router
