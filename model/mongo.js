@@ -21,6 +21,10 @@ class MongoModel {
     return this.db.collection(collection).findOne(query)
   }
 
+  delete(collection, query) {
+    return this.db.collection(collection).deleteOne(query)
+  }
+
   count(collection, query) {
     return this.db.collection(collection).count(query)
   }

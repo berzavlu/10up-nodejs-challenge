@@ -40,5 +40,16 @@ router.post('/new', authorization, async function (req, res, next) {
   }
 })
 
+router.delete('/delete/:movieId', authorization, async function (req, res, next) {
+  try {
+    const movieId = req.params.movieId
+    const result = await moviesController.deleteMovie(movieId)
+
+    res.status(200).json(result)
+  } catch (err) {
+    next(err)
+  }
+})
+
 
 module.exports = router
