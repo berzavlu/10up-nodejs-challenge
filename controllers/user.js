@@ -33,6 +33,8 @@ class UserController {
           name: user.name,
         }
         token = generateJWT(payload)
+      } else {
+        throw new Error(401, 0, 10, 'User or password incorrect', 'User or password incorrect', null)
       }
 
       return {
