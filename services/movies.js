@@ -30,4 +30,15 @@ router.get('/:movieId', authorization, async function (req, res, next) {
   }
 })
 
+router.post('/new', authorization, async function (req, res, next) {
+  try {
+    const result = await moviesController.addMovie(req.body)
+
+    res.status(200).json(result)
+  } catch (err) {
+    next(err)
+  }
+})
+
+
 module.exports = router

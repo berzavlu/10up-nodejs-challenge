@@ -70,6 +70,36 @@ class MoviesController {
 			}
 		}
 	}
+
+  async addMovie(moviePayload) {
+		var mongoModel = null
+
+		try {
+			// Connection and Open DB
+			await this.mongoClientDB.connect()
+
+			// Models
+			mongoModel = new MongoModel(this.mongoClientDB.getDB())
+      const response = await mongoModel.create('movies', moviePayload)
+      
+			return {
+				status: true,
+        data: response,
+				message: 'Success get movie detail',
+			}
+		} catch (err) {
+			if (err instanceof Error) {
+				throw err
+			} else {
+        console.log(err)
+				throw new Error(400, 0, 10, err.message, 'Inter error loading movies', err)
+			}
+		} finally {
+			if (this.mongoClientDB) {
+				this.mongoClientDB.close()
+			}
+		}
+	}
 }
 
 module.exports = MoviesController
