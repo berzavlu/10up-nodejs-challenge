@@ -51,5 +51,16 @@ router.delete('/delete/:movieId', authorization, async function (req, res, next)
   }
 })
 
+router.put('/update/:movieId', authorization, async function (req, res, next) {
+  try {
+    const movieId = req.params.movieId
+    const result = await moviesController.updateMovie(movieId, req.body)
+
+    res.status(200).json(result)
+  } catch (err) {
+    next(err)
+  }
+})
+
 
 module.exports = router
